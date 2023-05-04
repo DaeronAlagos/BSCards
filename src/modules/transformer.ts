@@ -1,7 +1,9 @@
 import JSZip from "jszip";
 
 const $wrapper = document.getElementById('wrapper') as HTMLElement
-const $intro = document.getElementById('intro') as HTMLElement
+const $start: HTMLElement = document.getElementById('start') as HTMLElement
+const $gameSystemContainer = document.getElementById('gameSystemContainer') as HTMLElement
+const $gameSystem: HTMLElement = document.getElementById('gameSystem') as HTMLElement
 
 export class Transformer {
   file: File | string
@@ -22,7 +24,11 @@ export class Transformer {
 
   private getGameSystemName(xmlDom: XMLDocument): string {
     const roster: HTMLElement = xmlDom.querySelector('roster') as HTMLElement
-    return roster.getAttribute('gameSystemName') as string
+    const name: string = roster.getAttribute('gameSystemName') as string
+    console.log('name', name)
+    $gameSystem.innerText = name
+
+    return name
   }
 
   private async getStylesheet(gameSystem: string) {
@@ -40,7 +46,7 @@ export class Transformer {
   }
 
   private async loaded() {
-    let data
+    let data: string
     if (this.file.slice(0, 1) == 'P') {
       data = await this.unzip()
     } else {
@@ -58,7 +64,9 @@ export class Transformer {
 
   public async render() {
     const fragment: DocumentFragment = await this.loaded()
-    $intro.classList.add('hidden')
+
+    $start.classList.add('hidden')
+    $gameSystemContainer.classList.remove('hidden')
 
     $wrapper.innerText = ''
     $wrapper.appendChild(fragment)
