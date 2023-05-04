@@ -41,9 +41,18 @@
         <div class="w-60 h-[21rem] bg-white border-solid border border-black m-2 text-xs font-mono print:break-inside-avoid">
             <div class="flex items-center justify-between font-semibold">
                 <div class="py-1 px-2">NAME</div>
-                <div class="py-1 px-2 rounded-bl-lg bg-sky-800 text-white">
-                    <xsl:value-of select="bs:costs/bs:cost[@name='Cr']/@value"/>
-                </div>
+                <xsl:choose>
+                    <xsl:when test="contains('Captain|First Mate', bs:categories/bs:category[@primary='true']/@name)">
+                        <div class="py-1 px-2 rounded-bl-lg bg-red-600 text-white">
+                            <xsl:value-of select="bs:selections/bs:selection[@name='Level']/@number"/>
+                        </div>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <div class="py-1 px-2 rounded-bl-lg bg-sky-800 text-white">
+                            <xsl:value-of select="format-number(bs:costs/bs:cost[@name='Cr']/@value, '#')"/>
+                        </div>
+                    </xsl:otherwise>
+                </xsl:choose>
             </div>
             <div class="flex">
                 <div class="basis-2/5 italic">
@@ -113,7 +122,7 @@
                 </div>
             </div>
 
-            <xsl:if test="bs:categories/bs:category[@primary='true']/@name = 'Captain'">
+            <xsl:if test="contains('Captain|First Mate', bs:categories/bs:category[@primary='true']/@name)">
                 <div class="my-2">
                     <div class="align-middle px-3 py-0.5 font-semibold text-[0.6rem] bg-sky-800 text-white print:text-black print:bg-gray-200">
                         POWERS
