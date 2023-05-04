@@ -38,7 +38,7 @@
     </xsl:template>
 
     <xsl:template match="bs:selection[@type='model']">
-        <div class="w-60 h-[21rem] bg-white border-solid border border-black m-2 text-xs font-mono print:break-inside-avoid">
+        <div class="w-60 h-[21rem] bg-white border-solid border border-black m-1 print:m-0 text-xs font-mono print:break-inside-avoid">
             <div class="flex items-center justify-between font-semibold">
                 <div class="py-1 px-2">NAME</div>
                 <xsl:choose>
@@ -103,13 +103,14 @@
                 </div>
                 <div class="basis-3/5 flex flex-row items-end justify-between">
                     <div class="border border-solid border-black w-7 h-[1.1rem]"/>
-                    <div class="font-semibold pr-2 uppercase">
+                    <div class="font-semibold pr-2 uppercase text-right">
                         <xsl:value-of select="@name"/>
                     </div>
                 </div>
             </div>
             <div class="my-2">
-                <div class="align-middle px-3 py-0.5 font-semibold text-[0.6rem] bg-sky-800 text-white print:text-black print:bg-gray-200">WEAPONS
+                <div class="align-middle px-3 py-0.5 font-semibold text-[0.6rem] bg-sky-800 text-white print:text-black print:bg-gray-200">
+                    WEAPONS
                     &amp; EQUIPMENT
                 </div>
                 <div class="mx-6 my-1 text-[0.5rem]/3 uppercase">
