@@ -28,7 +28,7 @@
                 </div>
                 <div class="flex-1 text-right">
                     Points:
-                    <xsl:value-of select="bs:costs/bs:cost[@name=' Pts']/@value"/>
+                    <xsl:value-of select="sum(.//bs:cost[@name=' Pts']/@value)"/>
                 </div>
             </div>
             <div class="flex"> <!-- body -->
