@@ -31,9 +31,9 @@
                     <xsl:value-of select="sum(.//bs:cost[@name=' Pts']/@value)"/>
                 </div>
             </div>
-            <div class="flex"> <!-- body -->
+            <div class="flex text-xs"> <!-- body -->
                 <div class="flex flex-col flex-1 p-2 mr-1 bg-gray-200">
-                    <div class="flex text-xs">
+                    <div class="flex">
                         <div class="flex-1">
                             <table class="w-full">
                                 <tr>
@@ -107,8 +107,8 @@
                         </div>
                     </div> <!-- stats -->
                     <div class="px-3 my-2">
-                        <span>Special Rules</span>
-                        <ul class="list-disc list-inside">
+                        <span class="w-full block text-center mb-2">Special Rules</span>
+                        <ul class="list-disc list-inside pl-6">
                             <xsl:for-each select="bs:rules/bs:rule">
                                 <li>
                                     <xsl:value-of select="@name"/>
@@ -120,7 +120,7 @@
                 <div class="flex flex-col flex-1 p-2 ml-1 bg-gray-200">
                     <div>
                         <span class="w-full block text-center mb-2">Options</span>
-                        <ul class="list-disc list-inside">
+                        <ul class="list-disc list-inside pl-6">
                             <xsl:apply-templates select="bs:selections/bs:selection[@type='upgrade']"/>
                         </ul>
                     </div> <!-- options -->
