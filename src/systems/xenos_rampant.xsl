@@ -11,9 +11,12 @@
     </xsl:template>
 
     <xsl:template match="bs:selection[@type='upgrade']">
-        <li>
-            <xsl:value-of select="@name"/>
-        </li>
+        <xsl:param name="category" />
+        <xsl:if test="bs:categories/bs:category/@name = $category">
+            <li>
+                <xsl:value-of select="@name" />
+            </li>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="bs:selection[@type='unit']">
@@ -124,8 +127,19 @@
                             <xsl:apply-templates select="bs:selections/bs:selection[@type='upgrade']"/>
                         </ul>
                     </div> <!-- options -->
-                    <div>
-                        <span class="w-full block text-center mb-2">Xenos Rules</span>
+                    <div class="mt-2">
+                        <span
+              class="w-full block text-center mb-2"
+            >Xenos Rules</span>
+                        <ul class="list-disc list-inside pl-6">
+                            <xsl:apply-templates
+                select="bs:selections/bs:selection[@type='upgrade']"
+              >
+                                <xsl:with-param
+                  name="category"
+                >Xenos Rules</xsl:with-param>
+                            </xsl:apply-templates>
+                        </ul>
                     </div> <!-- xeno rules -->
                 </div>
             </div>
