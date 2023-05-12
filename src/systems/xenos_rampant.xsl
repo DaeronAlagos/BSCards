@@ -75,9 +75,12 @@
                                 <tr>
                                     <td>Courage</td>
                                     <td>
-                                        <xsl:value-of
-                      select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Courage']/."
-                    />
+                                        <xsl:variable name="courage" select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Courage']/."/>
+                                        <xsl:value-of select="$courage"/>
+                                        <xsl:if test="$courage &lt; 6">
+                                            <span>+</span>
+                                        </xsl:if>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -95,26 +98,32 @@
                                 <tr>
                                     <td>Attack Value</td>
                                     <td>
-                                        <xsl:value-of
-                      select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Attack Value']/."
-                    />
+                                        <xsl:variable name="av" select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Attack Value']/."/>
+                                        <xsl:value-of select="$av"/>
+                                        <xsl:if test="$av &lt; 6">
+                                            <span>+</span>
+                                        </xsl:if>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Defence Value</td>
                                     <td>
-                                        <xsl:value-of
-                      select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Defence Value']/."
-                    />
+                                        <xsl:variable name="dv" select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Defence Value']/."/>
+                                        <xsl:value-of select="$dv"/>
+                                        <xsl:if test="$dv &lt; 6">
+                                            <span>+</span>
+                                        </xsl:if>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Shoot Value / Range</td>
                                     <td>
-                                        <xsl:value-of
-                      select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Shoot Value']/."
-                    />
-                                        <span>/</span>
+                                        <xsl:variable name="sv" select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Shoot Value']/."/>
+                                        <xsl:value-of select="$sv"/>
+                                        <xsl:if test="$sv &lt; 6">
+                                            <span>+</span>
+                                        </xsl:if>
+                                        <span> / </span>
                                         <xsl:value-of
                       select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Range']/."
                     />
@@ -127,10 +136,11 @@
                                         <xsl:value-of
                       select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Maximum Movement']/."
                     />
+                                        <span>"</span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Str Pts</td>
+                                    <td>Strength Points</td>
                                     <td>
                                         <xsl:value-of
                       select="bs:profiles/bs:profile/bs:characteristics/bs:characteristic[@name='Strength Points']/."
@@ -154,7 +164,7 @@
                 <div class="flex flex-col flex-1 p-2 ml-1 bg-gray-200">
                     <div>
                         <span
-              class="w-full block text-center mb-2"
+              class="w-full block mb-2"
             >Options</span>
                         <ul class="list-disc list-inside pl-6">
                             <xsl:apply-templates
@@ -168,7 +178,7 @@
                     </div> <!-- options -->
                     <div class="mt-2">
                         <span
-              class="w-full block text-center mb-2"
+              class="w-full block mb-2"
             >Xenos Rules</span>
                         <ul class="list-disc list-inside pl-6">
                             <xsl:apply-templates
@@ -179,7 +189,7 @@
                 >Xenos Rules</xsl:with-param>
                             </xsl:apply-templates>
                         </ul>
-                    </div> <!-- xeno rules -->
+                    </div> <!-- xenos rules -->
                 </div>
             </div>
         </div>
