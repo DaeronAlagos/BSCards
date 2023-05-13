@@ -1,6 +1,6 @@
 import { Transformer } from './modules/transformer'
 
-const $fileInput = document.getElementById('file') as HTMLInputElement
+const $rosterInput = document.getElementById('roster_input') as HTMLInputElement
 const $wrapper = document.getElementById('wrapper') as HTMLElement
 const $start: HTMLElement = document.getElementById('start') as HTMLElement
 const $gameSystemContainer: HTMLElement = document.getElementById(
@@ -11,7 +11,7 @@ const $gameSystem: HTMLElement = document.getElementById(
 ) as HTMLElement
 const $print = document.getElementById('print') as HTMLElement
 
-$fileInput.addEventListener('change', (e: Event) => {
+$rosterInput.addEventListener('change', (e: Event) => {
   const files = (<HTMLInputElement>e.target).files
   if (files) {
     const fr = new FileReader()
