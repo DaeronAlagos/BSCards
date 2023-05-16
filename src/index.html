@@ -13,80 +13,126 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="index.ts" defer type="module"></script>
   </head>
-  <body class="h-full font-dosis">
-    <div id="container" class="min-h-full">
-      <header class="sticky top-0 bg-gray-800 print:hidden">
-        <div class="mx-auto flex max-w-7xl py-2">
-          <div class="flex flex-1 items-center">
-            <div id="logo" class="text-white">LOGO</div>
-            <div id="rosterInput" class="px-12">
-              <label class="block">
-                <input
-                  id="file"
-                  type="file"
-                  accept=".ros, .rosz"
-                  class="uppercase text-white file:border-0 file:bg-orange-600 file:p-3 file:font-semibold file:uppercase file:text-white hover:file:bg-orange-400"
-                />
-              </label>
+  <body class="font-dosis">
+    <header class="w-full bg-gray-800 p-6 lg:p-3 print:hidden">
+      <div class="mx-auto flex max-w-7xl items-center justify-between">
+        <div class="flex items-center">
+          <div class="text-white">LOGO</div>
+          <div class="px-3">
+            <label class="block px-4" for="roster_input"
+              ><input
+                class="block w-full cursor-pointer text-4xl text-white file:cursor-pointer file:border-0 file:bg-orange-600 file:px-8 file:py-6 file:font-semibold file:uppercase file:text-white lg:text-xl file:lg:p-2"
+                type="file"
+                name="roster_input"
+                id="roster_input"
+                accept=".ros, .rosz"
+              />
+            </label>
+          </div>
+        </div>
+        <div
+          id="game_system_container"
+          class="invisible text-center text-4xl uppercase text-white lg:text-xl"
+        >
+          Game System:
+          <span id="game_system" class="px-2"></span>
+        </div>
+        <div class="flex grow cursor-pointer justify-end">
+          <div
+            id="print"
+            class="hidden bg-blue-800 px-4 py-2 text-xl font-semibold text-white"
+          >
+            PRINT
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="mx-auto max-w-7xl p-4 xl:px-0">
+      <div
+        id="error"
+        class="mb-6 hidden bg-red-800 p-6 text-4xl text-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] lg:text-xl"
+      ></div>
+      <div id="start" class="flex flex-col gap-4">
+        <div id="how" class="flex flex-wrap gap-4">
+          <div
+            id="how_upload"
+            class="flex grow bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
+          >
+            <div
+              class="mr-4 flex w-12 items-center justify-center bg-gray-800 px-4 text-6xl text-white"
+            >
+              <span>1</span>
+            </div>
+            <div class="">
+              <h5
+                class="mb-2 text-4xl font-medium leading-tight text-neutral-800 lg:text-xl"
+              >
+                Upload your Roster
+              </h5>
+              <p class="mb-4 text-3xl text-neutral-600 lg:text-base">
+                Click the 'Choose File' button above and select your Roster file
+                (.ros or .rosz)
+              </p>
             </div>
           </div>
-          <div class="flex flex-1 items-center justify-center">
+          <div
+            id="how_view"
+            class="flex grow bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] lg:hidden"
+          >
             <div
-              id="gameSystemContainer"
-              class="hidden items-center text-base uppercase text-white"
+              class="mr-4 flex w-12 items-center justify-center bg-gray-800 px-4 text-center text-6xl text-white"
             >
-              Game System: <span id="gameSystem"></span>
+              <span>2</span>
+            </div>
+            <div>
+              <h5
+                class="mb-2 text-4xl font-medium leading-tight text-neutral-800 lg:text-xl"
+              >
+                View your Cards
+              </h5>
+              <p class="mb-4 text-3xl text-neutral-600">
+                The game system style sheets are formatted, so you can easily
+                view cards for the units on your mobile device.
+              </p>
             </div>
           </div>
-
-          <div class="flex flex-1 justify-end">
+          <div
+            id="how_print"
+            class="hidden grow bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] lg:flex"
+          >
             <div
-              id="print"
-              class="hidden bg-indigo-600 px-6 py-3 text-base font-semibold uppercase text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              class="mr-4 flex w-12 basis-4 items-center justify-center bg-gray-800 px-4 text-center text-6xl text-white"
             >
-              Print
+              <span>2</span>
+            </div>
+            <div>
+              <h5
+                class="mb-2 text-4xl font-medium leading-tight text-neutral-800 lg:text-xl"
+              >
+                Print your Cards
+              </h5>
+              <p class="mb-4 text-base text-neutral-600">
+                Click Print for a printer friendly version of the unit cards.
+              </p>
             </div>
           </div>
         </div>
-      </header>
-      <section class="mx-auto max-w-7xl py-6">
-        <div id="error" class="max-w mb-4 hidden bg-gray-200 p-4">
-          Game system is currently unsupported
+        <div
+          id="systems"
+          class="bg-white p-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]"
+        >
+          <h5
+            class="mb-2 text-4xl font-medium leading-tight text-neutral-800 lg:text-xl"
+          >
+            Supported Games
+          </h5>
+          <ul class="list-inside list-disc text-3xl lg:text-base">
+            <li>Stargrave</li>
+            <li>Xenos Rampant</li>
+          </ul>
         </div>
-        <div id="start" class="max-w flex">
-          <div class="mx-3 grow drop-shadow-xl">
-            <div
-              class="bg-emerald-400 p-3 text-center text-xl font-semibold uppercase text-gray-800"
-            >
-              1 - Upload your Roster
-            </div>
-            <div class="h-96 bg-gray-200"></div>
-          </div>
-          <div class="mx-3 grow drop-shadow-xl">
-            <div
-              class="bg-emerald-500 p-3 text-center text-xl font-semibold uppercase text-gray-800"
-            >
-              2 - Print your Roster
-            </div>
-            <div class="h-96 bg-gray-200"></div>
-          </div>
-          <div class="mx-3 grow drop-shadow-xl">
-            <div
-              class="bg-emerald-600 p-3 text-center text-xl font-semibold uppercase text-gray-800"
-            >
-              Supported Games
-            </div>
-            <div class="h-96 bg-gray-200 p-4">
-              <ul class="list-disc pl-12 text-xl uppercase">
-                <li class="leading-8">Stargrave</li>
-                <li class="leading-8">Xenos Rampant</li>
-                <li class="leading-8 line-through">The Silver Bayonet</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div id="wrapper" class="max-w mx-auto flex flex-wrap"></div>
-      </section>
+      </div>
+      <div id="wrapper"></div>
     </div>
   </body>
 </html>
